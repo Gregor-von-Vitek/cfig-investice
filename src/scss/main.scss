@@ -1,0 +1,436 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import "variables.scss";
+@import "login.scss";
+@import "app.scss";
+
+@font-face {
+  font-family: 'ITC Avant Garde Pro';
+  src: url('./fonts/ITCAvantGardePro-Bk.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ITC Avant Garde Pro';
+  src: url('./fonts/ITCAvantGardePro-Md.otf') format('opentype'); // Replace with the correct file path
+  font-weight: 500;
+  font-style: normal;
+}
+
+// Reset & Base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+  color: $color-text;
+  background-color: $color-surface-grey2;
+  position: relative;
+  min-height: 100vh;
+  font-size: 14px;
+  font-weight: 400;
+
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 300;
+  color: $color-surface-blue1;
+  padding-bottom: 25px;
+  text-align: left;
+  font-family: 'ITC Avant Garde Pro', sans-serif;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 500;
+  color: $color-surface-blue2;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: $color-surface-blue2;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-surface-blue2;
+}
+
+h2,
+h3,
+h4 {
+  font-family: 'ITC Avant Garde Pro', sans-serif;
+  text-align: left;
+}
+
+.t1 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.t2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.t3 {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.t4 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.t-blue {
+  color: $color-surface-blue2;
+}
+
+.t-gold {
+  color: $color-surface-gold2;
+}
+
+.t-space {
+  letter-spacing: 5px;
+}
+
+.t-left {
+  text-align: left;
+  display: block;
+}
+
+.t-background {
+  padding: 5px 10px;
+
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+
+  i {
+    margin-right: 8px;
+  }
+
+  &.grey {
+    background-color: $color-status-neutral3;
+    color: $color-status-neutral1;
+    border: 1px solid $color-border-grey;
+  }
+
+  &.red {
+    background-color: $color-status-error3;
+    color: $color-status-error1;
+    border: 1px solid $color-border-red;
+  }
+
+  &.blue {
+    background-color: $color-status-info3;
+    color: $color-status-info1;
+    border: 1px solid $color-border-blue;
+  }
+
+  &.green {
+    background-color: $color-status-success3;
+    color: $color-status-success1;
+    border: 1px solid $color-border-green;
+  }
+  &.yellow {
+    background-color: #F9F5E5;
+    color: #9C7A16;
+    border: 1px solid $color-border-yellow;
+  }
+}
+
+
+
+input {
+  outline: none;
+  padding: 10px;
+  border: 1px solid $color-surface-grey2;
+  border-radius: 2px;
+  width: 100%;
+  line-height: 18px;
+  padding-right: 30px;
+  /* Add space for the validation icon */
+}
+
+.validation-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-status-success1;
+  display: none;
+  /* Hide by default */
+
+  &.visible {
+    display: block;
+    /* Show when class 'visible' is added */
+  }
+}
+
+/* Form group needs position relative for absolute positioning of validation icon */
+.form-group {
+  position: relative;
+}
+
+.message-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.message {
+  display: flex;
+  align-items: stretch; // Ensure children stretch to the same height
+  border-radius: 2px;
+  margin-bottom: 10px;
+  color: #fff;
+  overflow: hidden;
+  height: 41px;
+
+  .icon {
+    padding: 0 15px;
+    display: flex; // Center content inside
+    align-items: center;
+  }
+
+  .message-info {
+    padding: 10px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 100%; // Match the height of the parent
+    display: flex; // Center content inside
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.message.success {
+  .icon {
+    background-color: $color-status-success1;
+  }
+
+  .message-info {
+    background-color: $color-status-success3;
+    color: $color-status-success1;
+  }
+}
+
+.message.error {
+  .icon {
+    background-color: $color-status-error1;
+  }
+
+  .message-info {
+    background-color: $color-status-error3;
+    color: $color-status-error1;
+  }
+}
+
+
+.close-message {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+input.error {
+  border: 1px solid $color-status-error1 !important;
+}
+
+.field-error {
+  color: $color-status-error1;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.field-error i {
+  margin-right: 5px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.password-rules label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+
+  &.check-success {
+    color: $color-status-success1;
+  }
+}
+
+.password-rules input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.check-success {
+  color: green;
+}
+
+.password-rules i {
+  margin-right: 10px;
+}
+
+button, .button {
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  width: 100%;
+
+  &.blue {
+    background-color: $color-surface-blue2;
+    color: white;
+
+    &:not(:disabled):hover {
+      background-color: $color-surface-blue1;
+    }
+  }
+
+  // &.light {
+  //     background-color: $color-surface-blue5;
+  //     color: $color-surface-blue2;
+  //     &:not(:disabled):hover {
+  //       color: $color-surface-blue1;
+  //       background-color: $color-surface-blue4;
+  //   }
+  // }  
+  &.light {
+    background-color: #fff;
+    color: $color-surface-blue2;
+    border: 1px solid $color-surface-blue4;
+    border-radius: 2px;
+
+    &:not(:disabled):hover {
+      border-color: $color-surface-blue2;
+      background-color: $color-surface-blue4;
+    }
+  }
+
+  &.border {
+    background-color: #fff;
+    color: $color-surface-blue2;
+    border: 1px solid $color-surface-blue4;
+    border-radius: 2px;
+
+    &:not(:disabled):hover {
+      border-color: $color-surface-blue2;
+      background-color: $color-surface-blue4;
+    }
+  }
+
+  &.text {
+    color: $color-surface-blue2;
+    background-color: transparent;
+
+    &:not(:disabled):hover {
+      background-color: $color-surface-blue5;
+    }
+  }
+  &.red {
+    background-color: $color-status-error3;
+    color: $color-status-error1;
+
+    &:not(:disabled):hover {
+      background-color: $color-border-red;
+    }
+  }
+
+  &.p20 {
+    width: calc(100% - 40px);
+    margin-left: 20px;
+  }
+
+  i {
+    margin-left: 10px;
+    &.left-m {
+      margin-left: 0;
+      margin-right: 10px;
+    }
+  }
+
+}
+
+button:disabled, .button:disabled {
+  // background-color: $color-disable !important;
+  // color: $color-surface-blue3;
+  opacity: 0.4;
+  cursor: not-allowed !important;
+
+  &:hover {
+    // color: $color-surface-blue3;
+  }
+}
+
+.sidebar-toggle {
+  width: auto;
+}
+
+.space-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .message-container {
+    width: 90%;
+    top: 15px;
+  }
+
+  .message {
+    height: auto;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+.no-m {
+  margin: 0;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
+}
+
+.p-r-20 {
+  padding-right: 20px;
+}
+
+.p-t-2 {
+  padding-top: 2px;
+}
+.p-12 {
+  padding: 12px!important;
+}
