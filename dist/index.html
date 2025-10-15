@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CFIG INVESTICE</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/all.min.css">
+  <script src="js/jquery.min.js"></script>
+  <meta name="format-detection" content="telephone=no, email=no">
+</head>
+
+<body class="login ">
+  <div class="background"></div>
+  <div class="message-container"></div>
+  <div class="space-between">
+    <div class="login-container login-form show">
+      <span class="t4 t-gold t-space t-left">CFIG INVESTICE</span>
+      <h1>Přihlásit se</h1>
+      <form>
+        <div class="form-row">
+          <label for="contract">Číslo smlouvy</label>
+          <input type="string" id="contract" name="contract" required />
+        </div>
+        <div class="form-row">
+          <div class="password-container">
+            <label for="password">Heslo</label>
+            <a href="#" class="forgot-password">Zapomenuté heslo</a>
+          </div>
+          <div class="password-field">
+            <input type="password" id="password" name="password" required />
+            <i class="fa fa-eye show-password"></i>
+          </div>
+        </div>
+        <button class="blue" type="submit" class="login-button">Přihlásit se</button>
+        <button class="light  register-button">
+          <i class="far fa-user-plus"></i> Vytvořit účet
+        </button></button>
+      </form>
+    </div>
+    <div class="login-container forgot-password-form hide">
+      <span class="t4 t-gold t-space t-left">CFIG INVESTICE</span>
+      <h1>Zapomenuté heslo</h1>
+      <form>
+        <div class="form-row">
+          <label for="forgot-contract">Číslo smlouvy</label>
+          <input type="string" id="forgot-contract" name="forgot-contract" required />
+        </div>
+        <button class="blue no-m" type="submit" class="login-button">Odeslat</button>
+        <button class="light back-to-login">
+          <i class="fas fa-arrow-left"></i> Zpět na přihlášení
+        </button>
+      </form>
+    </div>
+    <div class="login-container register-form hide">
+      <span class="t4 t-gold t-space t-left">CFIG INVESTICE</span>
+      <h1>Vytvořit účet</h1>
+      <form>
+        <div class="form-row split">
+          <div>
+            <label for="first-name">Jméno</label>
+            <input type="text" id="first-name" name="first-name" required />
+          </div>
+          <div >
+            <label for="last-name">Příjmení</label>
+            <input type="text" id="last-name" name="last-name" required />
+          </div>
+        </div>
+        <div class="form-row split">
+          <div>
+            <label for="company">Název společnosti</label>
+            <input type="text" id="company" name="company" />
+          </div>
+          <div >
+            <label for="ico">IČO</label>
+            <input type="text" id="ico" name="ico" />
+          </div>
+        </div>
+        <div class="form-row split">
+          <div>
+            <label for="phone">Telefon</label>
+            <input type="text" id="phone" name="phone" />
+          </div>
+          <div >
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+        </div>
+        <div class="form-row m-b-20">
+          <label for="bank-account">Bankovní spojení</label>
+          <input type="text" id="bank-account" name="bank-account" />
+        </div>
+        <div class="form-row m-b-20">
+          <label for="register-password">Heslo</label>
+          <div class="password-field">
+            <input type="password" id="register-password" name="register-password" required />
+            <i class="fas fa-eye show-password"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="password-rules">
+            <label><i class="far fa-circle"></i> Minimálně 8 znaků</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno velké písmeno (A–Z)</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno malé písmeno (a–z)</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno číslo (0–9)</label>
+          </div>
+        </div>
+        <input class="button blue register-button" type="submit" disabled value="Vytvořit účet"></input>
+        <button class="light back-to-login">
+          <i class="fas fa-arrow-left"></i> Zpět na přihlášení
+        </button>
+      </form>
+    </div>
+    <footer>
+      <img src="images/cfig-logo-white.png" alt="CFIG Logo" class="logo" />
+      <p>V případě problémů pište na <a href="mailto:partner@cfigcredit.cz">partner@cfigcredit.cz</a> nebo volejte na <a
+          href="tel:464 602 085">464 602 085</a></p>
+      <p>Všechna práva vyhrazena © 2013 -
+        <script>document.write(new Date().getFullYear());</script> CFIG SE.
+      </p>
+    </footer>
+  </div>
+</body>
+<script src="js/main.js"></script>
+
+</html>

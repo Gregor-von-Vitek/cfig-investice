@@ -268,18 +268,19 @@ $(function () {
     "<ul>" +
     '<li><a href="index.html" style="color: #fff;">index.html</a></li>' +
     '<li><a href="new-password.html" style="color: #fff;">new-password.html</a></li>' +
-    '<li><a href="prehled.html" style="color: #fff;">prehled.html</a></li>' +
-    '<li><a href="prehled-bez-udaju.html" style="color: #fff;">prehled-bez-udaju.html</a></li>' +
+    '<li><a href="instrukce-k-zaplaceni.html" style="color: #fff;">instrukce-k-zaplaceni.html</a></li>' +
+    '<li><a href="instrukce-k-zaplaceni-2.html" style="color: #fff;">instrukce-k-zaplaceni-2.html</a></li>' +
+    '<li><a href="prehled-1.html" style="color: #fff;">prehled-1.html</a></li>' +
+    '<li><a href="prehled-2.html" style="color: #fff;">prehled-2.html</a></li>' +
+    '<li><a href="investice.html" style="color: #fff;">investice.html</a></li>' +
     '<li><a href="aktuality.html" style="color: #fff;">aktuality.html</a></li>' +
-    '<li><a href="detail-aktuality.html" style="color: #fff;">detail-aktuality.html</a></li>' +
-    '<li><a href="detail-smlouvy.html" style="color: #fff;">detail-smlouvy.html</a></li>' +
-    '<li><a href="zadosti.html" style="color: #fff;">zadosti.html</a></li>' +
-    '<li><a href="zadosti-bez-udaju.html" style="color: #fff;">zadosti-bez-udaju.html</a></li>' +
-    '<li><a href="smlouvy.html" style="color: #fff;">smlouvy.html</a></li>' +
-    '<li><a href="smlouvy-bez-udaju.html" style="color: #fff;">smlouvy-bez-udaju.html</a></li>' +
-    '<li><a href="dokumenty.html" style="color: #fff;">dokumenty.html</a></li>' +
-    '<li><a href="vyuctovani.html" style="color: #fff;">vyuctovani.html</a></li>' +
-    '<li><a href="vyuctovani-bez-udaju.html" style="color: #fff;">vyuctovani-bez-udaju.html</a></li>' +
+    '<li><a href="aktuality-detail.html" style="color: #fff;">aktuality-detail.html</a></li>' +
+    '<li><a href="muj-ucet-osobni-udaje.html" style="color: #fff;">muj-ucet-osobni-udaje.html</a></li>' +
+    '<li><a href="muj-ucet-zadosti-o-zmenu.html" style="color: #fff;">muj-ucet-zadosti-o-zmenu.html</a></li>' +
+    '<li><a href="detail-o-investici.html" style="color: #fff;">detail-o-investici.html</a></li>' +
+    '<li><a href="detail-platby.html" style="color: #fff;">detail-platby.html</a></li>' +
+    '<li><a href="detail-dokumenty.html" style="color: #fff;">detail-dokumenty.html</a></li>' +
+    '<li><a href="detail-kontakt.html" style="color: #fff;">detail-kontakt.html</a></li>' +
     "</ul>" +
     "</div>" +
     '<button class="sidebar-toggle" style="position: fixed; left: 0; top: 50%; transform: translateY(-50%); background-color: #333; color: #fff; border: none; padding: 10px; cursor: pointer;">☰</button>';
@@ -293,7 +294,7 @@ $(function () {
   // Příklad: showOverlay("overlay-id");
   window.showOverlay = function (overlayId) {
 
-    const sideOverlays = ['odklad-splatek-overlay', 'upravit-trvala-adresa-overlay', 'upravit-dorucovaci-adresa-overlay', 'napoveda-prehled-overlay', 'vytvorit-zadost-overlay', 'napoveda-zadosti-overlay', 'napoveda-smlouvy-overlay', 'napoveda-dokumenty-overlay', 'napoveda-vyuctovani-overlay'];
+    const sideOverlays = ['odklad-splatek-overlay', 'upravit-trvala-adresa-overlay', 'upravit-dorucovaci-adresa-overlay', 'napoveda-prehled-overlay', 'vytvorit-zadost-overlay', 'napoveda-zadosti-overlay', 'napoveda-smlouvy-overlay', 'napoveda-dokumenty-overlay', 'napoveda-vyuctovani-overlay', 'upravit-bankovni-ucet-overlay', 'upravit-majetkovy-ucet-overlay'];
     
     // Measure scrollbar width
     const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -317,13 +318,19 @@ $(function () {
       $("#" + overlayId + " select:first").focus();
     }
     else if (overlayId === 'upravit-trvala-adresa-overlay' || overlayId === 'upravit-dorucovaci-adresa-overlay') {
-      $("#" + overlayId + " close-overlay:first").focus();
+      $("#" + overlayId + " .close-overlay:first").focus();
     }
     else if (overlayId === 'upravit-telefon-overlay' || overlayId === 'upravit-email-overlay') {
       $("#" + overlayId + " .close-overlay:first").focus();
     }
     else if (overlayId === 'photo-example-overlay') {
       $("#" + overlayId + " .close-photo-example:first").focus();
+    } 
+    else if (overlayId === 'upravit-majetkovy-ucet-overlay') {
+      $("#" + overlayId + " .close-overlay:first:first").focus();
+    }
+    else if (overlayId === 'upravit-bankovni-ucet-overlay') {
+      $("#" + overlayId + " .close-overlay:first:first").focus();
     }
     else {
       $("#" + overlayId + " button:first").focus();
@@ -771,5 +778,128 @@ $(function () {
       $filter.css("display", "flex");
     }
   });
+
+
+   ////////////////////////////////////////////////////
+  /////              Správa úvěru V2             /////
+  ////////////////////////////////////////////////////
+  
+  // Formátování čísla karty (přidání mezer každé 4 číslice)
+  $(document).on('input', '#card-number', function() {
+    let value = $(this).val().replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+    if (formattedValue !== $(this).val()) {
+      $(this).val(formattedValue);
+    }
+  });
+
+  // Formátování data expirace (MM/YY)
+  $(document).on('input', '#expiry-date', function() {
+    let value = $(this).val().replace(/\D/g, '');
+    if (value.length >= 2) {
+      value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    $(this).val(value);
+  });
+
+  // Omezení CVC pouze na číslice 
+  $(document).on('input', '#cvc', function() {
+    let value = $(this).val().replace(/[^0-9]/g, '');
+    $(this).val(value);
+  });
+
+  // Omezení jména na písmena, mezery a pomlčky
+  $(document).on('input', '#holder', function() {
+    let value = $(this).val().replace(/[^a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ\s\-]/g, '');
+    $(this).val(value);
+  });
+
+  // Validace formuláře pro změnu karty
+  function validateZmenaKartyForm() {
+    const cardNumber = $('#card-number').val().trim().replace(/\s/g, '');
+    const expiryDate = $('#expiry-date').val().trim();
+    const cvc = $('#cvc').val().trim();
+    const holder = $('#holder').val().trim();
+    const agreement = $('#agreement').is(':checked');
+    
+    // Validace čísla karty (13-19 číslic)
+    const isCardNumberValid = /^\d{13,19}$/.test(cardNumber);
+    
+    // Validace data expirace (MM/YY format a platné datum)
+    const isExpiryValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate);
+    let isExpiryDateValid = false;
+    if (isExpiryValid) {
+      const [month, year] = expiryDate.split('/');
+      const currentYear = new Date().getFullYear() % 100;
+      const currentMonth = new Date().getMonth() + 1;
+      const expYear = parseInt(year, 10);
+      const expMonth = parseInt(month, 10);
+      
+      isExpiryDateValid = expYear > currentYear || (expYear === currentYear && expMonth >= currentMonth);
+    }
+    
+    // Validace CVC (3-4 číslice)
+    const isCvcValid = /^\d{3,4}$/.test(cvc);
+    
+    // Validace jména (minimálně 2 znaky, obsahuje písmena)
+    const isHolderValid = holder.length >= 2 && /[a-zA-ZáčďéěíňóřšťúůýžÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]/.test(holder);
+    
+    const allFieldsValid = isCardNumberValid && isExpiryDateValid && isCvcValid && isHolderValid && agreement;
+    
+    // Zobrazení chyb
+    if (cardNumber && !isCardNumberValid) {
+      $('#card-number').addClass('error');
+    } else {
+      $('#card-number').removeClass('error');
+    }
+    
+    if (expiryDate && !isExpiryDateValid) {
+      $('#expiry-date').addClass('error');
+    } else {
+      $('#expiry-date').removeClass('error');
+    }
+    
+    if (cvc && !isCvcValid) {
+      $('#cvc').addClass('error');
+    } else {
+      $('#cvc').removeClass('error');
+    }
+    
+    if (holder && !isHolderValid) {
+      $('#holder').addClass('error');
+    } else {
+      $('#holder').removeClass('error');
+    }
+    
+    const submitButton = $('#verifikacni-platba');
+    if (allFieldsValid) {
+      submitButton.prop('disabled', false);
+    } else {
+      submitButton.prop('disabled', true);
+    }
+  }
+  
+  // Po změně polí spustit validaci
+  $(document).on('input change', '.zmena-karty-form input', validateZmenaKartyForm);
+  
+  // Spustit validaci při načtení stránky
+  if ($('.zmena-karty-form').length) {
+    validateZmenaKartyForm();
+  }
+
+  // Změnit kartu - odeslání požadavku
+  // Příklad: showWaitingForBank();
+  window.showWaitingForBank = function () {
+    $('#zmenit-kartu').hide();
+    $('#waiting-for-confirmation').show();
+  };
+
+  // Změnit kartu - karta nastavena
+  // Příklad: hideWaitingForConfirmation();
+  window.hideWaitingForConfirmation = function () {
+    $('#zmenit-kartu').hide();
+    $('#waiting-for-confirmation').hide();
+    $('#card-set').show();
+  };
 
 });

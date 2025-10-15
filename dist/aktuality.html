@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CFIG Investice - Aktuality</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/all.min.css" />
+  <script src="js/jquery.min.js"></script>
+  <meta name="format-detection" content="telephone=no, email=no">
+</head>
+
+<body class="app ">
+  <div class="message-container"></div>
+  <header>
+    <div class="header-container">
+      <div class="left-side">
+        <div class="logo">
+          <img src="images/cfig-logo-blue.png" alt="CFIG Logo" />
+        </div>
+        <div class="mobile-menu">
+          <span class="hamburger-icon">☰</span>
+          <span class="menu-text">Menu</span>
+        </div>
+        <nav class="navigation">
+          <ul>
+            <li><a href="#">Přehled</a></li>
+            <li><a href="#">Investice</a></li>
+            <li class="active"><a href="#">Aktuality</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="user-info">
+        <div class="user-icon">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="ucet">Tomáš Bulíček</div>
+        <div class="user-name">
+          <span class="t2 t-blue">Tomáš Bulíček</span>
+        </div>
+        <div class="arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      <ul class="user-submenu">
+        <li>
+          <a href="#">
+            <i class="fas fa-user-circle"></i> Můj účet
+          </a>
+        </li>
+        <li>
+          <a href="#" onclick="showOverlay('zmenit-heslo-overlay')">
+            <i class="fas fa-unlock"></i> Změnit heslo
+          </a>
+        </li>
+
+        <li class="logout">
+          <a href="#">
+            <i class="fas fa-sign-out-alt"></i> Odhlásit se
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <main>
+    <div class="submenu simple">
+      <div class="content-wrapper">
+        <div class="row">
+          <h2>Aktuality</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="card bottom-border">
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">Možnost prodloužení splatnosti úvěru</h3>
+              <div class="news-preview">Vážený kliente, rádi bychom Vás informovali o možnosti prodloužení splatnosti
+                vašeho úvěru a nabídce zprostředkování dalších financí.</div>
+              <div class="news-date">04.01.2025 15:21</div>
+            </a>
+          </div>
+        </div>
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">Výroční zpráva CFIG 2024</h3>
+              <div class="news-preview">Vážený kliente, dovolujeme si Vám představit výroční zprávu společnosti CFIG za
+                rok 2024. Najdete v ní klíčové ekonomické ukazatele, přehled dosažených cílů a strategický výhled do
+                dalších let.</div>
+              <div class="news-date">14.11.2025 14:44</div>
+            </a>
+          </div>
+        </div>
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">Nová příležitost ke spolupráci s CFIG Credit</h3>
+              <div class="news-preview">Vážený kliente, otevírá se Vám nová příležitost ke spolupráci s CFIG Credit.
+                Přidejte se k našemu partnerskému programu a využijte výhodné podmínky i atraktivní provizní systém.
+              </div>
+              <div class="news-date">15.10.2025 13:31</div>
+            </a>
+          </div>
+        </div>
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">AKCE: Bonus 50% k vaší provizi při schválení úvěru</h3>
+              <div class="news-preview">Vážený kliente, získejte jedinečný bonus – při schválení úvěru vám navýšíme
+                provizi o 50%. Využijte tuto akci a získejte více za každého schváleného klienta.</div>
+              <div class="news-date">15.09.2024 13:31</div>
+            </a>
+          </div>
+        </div>
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">Výroční zpráva CFIG 2024</h3>
+              <div class="news-preview">Vážený kliente, dovolujeme si Vám představit výroční zprávu společnosti CFIG za
+                rok 2024. Najdete v ní klíčové ekonomické ukazatele, přehled dosažených cílů a strategický výhled do
+                dalších let.</div>
+              <div class="news-date">14.11.2025 14:44</div>
+            </a>
+          </div>
+        </div>
+        <div class="news-item">
+
+          <div class="news-content">
+            <a href="#">
+              <h3 class="news-title">Nová příležitost ke spolupráci s CFIG Credit</h3>
+              <div class="news-preview">Vážený kliente, otevírá se Vám nová příležitost ke spolupráci s CFIG Credit.
+                Přidejte se k našemu partnerskému programu a využijte výhodné podmínky i atraktivní provizní systém.
+              </div>
+              <div class="news-date">15.10.2025 13:31</div>
+            </a>
+          </div>
+        </div>
+        <div class="table-pagination">
+          <div class="pagination-info">
+            <span>Na stránku</span>
+            <div class="pagination-select">
+              <select>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </div>
+            <span class="entries-info">Zobrazeno 11 - 20 z 32</span>
+          </div>
+          <div class="pagination-controls">
+            <a class="button text" title="Předchozí">
+              <i class="fas fa-chevron-left"></i> Předchozí
+            </a>
+            <a class="button text" title="Další">
+              Další <i class="fas fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
+  </main>
+  <footer>
+    <p>V případě problémů pište na info@cfigcredit.cz nebo volejte na 464 602 085</p>
+    <p>Všechna práva vyhrazena © 2013 – 2025 CFIG SE</p>
+  </footer>
+  <!-- Secondary Overlay Background (for stacked modals) -->
+  <div class="overlay-background" id="secondary-overlay-background"></div>
+  <div class="overlay-background" id="overlay-background"></div>
+  <!-- Center Overlay for Password Change -->
+  <div class="overlay" id="zmenit-heslo-overlay">
+    <div class="overlay-header">
+      <h3>Nastavit nové heslo</h3>
+      <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+    </div>
+    <div class="overlay-content">
+      <form>
+        <div class="form-row">
+          <label for="new-password">Nové heslo</label>
+          <div class="password-field">
+            <input type="password" id="new-password" name="new-password" required>
+            <i class="fas fa-eye show-password"></i>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="password-rules">
+            <label><i class="far fa-circle"></i> Minimálně 8 znaků</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno velké písmeno</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno malé písmeno</label>
+            <label><i class="far fa-circle"></i> Alespoň jedno číslo</label>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="confirm-password">Nové heslo znovu</label>
+          <div class="password-field">
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <i class="fas fa-eye show-password"></i>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="overlay-actions">
+      <button class="blue login-button" id="submit-heslo" disabled>Nastavit nové heslo</button>
+      <button class="light" id="cancel-heslo">Zrušit</button>
+    </div>
+  </div>
+</body>
+<script src="js/main.js"></script>
+
+</html>

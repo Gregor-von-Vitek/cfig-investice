@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CFIG Investice - Dokumenty</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <script src="js/jquery.min.js"></script>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="app ">
+    <div class="message-container"></div>
+    <header>
+        <div class="header-container">
+            <div class="left-side">
+                <div class="logo">
+                    <img src="images/cfig-logo-blue.png" alt="CFIG Logo">
+                </div>
+                <div class="mobile-menu">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="menu-text">Menu</span>
+                </div>
+                <nav class="navigation">
+                    <ul>
+                        <li><a href="#">Přehled</a></li>
+                        <li class="active"><a href="#">Investice</a></li>
+                        <li><a href="#">Aktuality</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="user-info">
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="ucet">Tomáš Bulíček</div>
+                <div class="user-name">
+                    <span class="t2 t-blue">Tomáš Bulíček</span>
+                </div>
+                <div class="arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <ul class="user-submenu">
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> Můj účet
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showOverlay('zmenit-heslo-overlay')">
+                        <i class="fas fa-unlock"></i> Změnit heslo
+                    </a>
+                </li>
+
+                <li class="logout">
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i> Odhlásit se
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="submenu simple extra">
+            <div class="content-wrapper-big">
+                <div class="row simple">
+
+                    <a href="#" class="button text p-12"><i class="fas fa-chevron-left"></i></a>
+                    <h2>Dluhopisy CFIG SE VII/2025-5Y</h2>
+                    <span class="t-background green">Aktivní</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">O investici</a></li>
+                        <li><a href="#">Platby</a></li>
+                        <li class="active"><a href="#">Dokumenty</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </nav>
+                <select class="mobile-nav" onchange="location = this.value;">
+                    <option value="#">O investici</option>
+                    <option value="#">Platby</option>
+                    <option value="#" selected>Dokumenty</option>
+                    <option value="#">Kontakt</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-wrapper-big">
+
+                <div class="card">
+
+                    <div class="document-list no-heading">
+                        <div class="document-item">
+                            <i class="far fa-file-pdf document-icon"></i>
+                            <div class="document-content">
+                                <div class="document-name ">Smluvní dokumentace 161559</div>
+                                <span class="document-date">15.1.2025 08:24</span>
+                            </div>
+                            <div class="flex-break"></div>
+                            <button class="light">
+                                <i class="fas fa-download"></i> Stáhnout
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <i class="far fa-file-pdf document-icon"></i>
+                            <div class="document-content">
+                                <div class="document-name">Smluvní dokumentace 161559</div>
+                                <span class="document-date">14.1.2025 08:24</span>
+                            </div>
+                            <div class="flex-break"></div>
+                            <button class="light">
+                                <i class="fas fa-download"></i> Stáhnout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>V případě problémů pište na <a href="mailto:partner@cfigcredit.cz">partner@cfigcredit.cz</a> nebo volejte na
+            <a href="tel:464 602 085">464 602 085</a>
+        </p>
+        <p>Všechna práva vyhrazena © 2013 -
+            <script>document.write(new Date().getFullYear());</script> CFIG
+        </p>
+    </footer>
+    <!-- Secondary Overlay Background (for stacked modals) -->
+    <div class="overlay-background" id="secondary-overlay-background"></div>
+    <div class="overlay-background" id="overlay-background"></div>
+
+
+
+
+    <!-- Center Overlay for Password Change -->
+    <div class="overlay" id="zmenit-heslo-overlay">
+        <div class="overlay-header">
+            <h3>Nastavit nové heslo</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <form>
+                <div class="form-row">
+                    <label for="new-password">Nové heslo</label>
+                    <div class="password-field">
+                        <input type="password" id="new-password" name="new-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="password-rules">
+                        <label><i class="far fa-circle"></i> Minimálně 8 znaků</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno velké písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno malé písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno číslo</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="confirm-password">Nové heslo znovu</label>
+                    <div class="password-field">
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue login-button" id="submit-heslo" disabled>Nastavit nové heslo</button>
+            <button class="light" id="cancel-heslo">Zrušit</button>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>
+
+
+</html>

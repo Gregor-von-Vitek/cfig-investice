@@ -33,7 +33,7 @@
 
   header {
     background-color: #fff;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $color-surface-blue5;
   }
 
   .header-container {
@@ -48,7 +48,7 @@
       align-items: center;
 
       .logo {
-        border-right: 1px solid $color-surface-grey2;
+        border-right: 1px solid $color-surface-blue5;
         padding-right: 25px;
         height: 100%;
         padding: 0px 30px;
@@ -173,7 +173,7 @@
 
       }
 
-      .button {
+      .button, button {
         margin: 0;
         width: auto;
 
@@ -1546,14 +1546,15 @@ a.download-link {
     display: flex;
     align-items: center;
     gap: 16px;
-    
 
-    button, .button {
-      width: auto!important;
-      max-width: auto!important;
+
+    button,
+    .button {
+      width: auto !important;
+      max-width: auto !important;
       margin-bottom: 0;
       white-space: nowrap;
-      
+
       i {
         font-size: 14px;
         margin-left: 0;
@@ -2633,5 +2634,492 @@ a.download-link {
 
   .card.small {
     flex: 1;
+  }
+}
+
+
+
+/* Správa úvěru V2 */
+#zmenit-kartu {
+  .zmena-karty-form {
+    margin-top: 16px;
+
+    .card-info {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+
+      .half-width {
+        width: 50%;
+      }
+
+      .card-details {
+        display: flex;
+        gap: 16px;
+      }
+    }
+  }
+
+  .note {
+    color: $color-status-neutral1;
+    font-size: 13px;
+    margin-top: 0px;
+    margin-bottom: 0;
+  }
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $color-surface-grey2;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    margin: 0;
+    padding-right: 10px;
+    outline: none;
+
+    &:hover {
+      border-color: $color-surface-blue2;
+    }
+
+    &:checked {
+      background-color: $color-surface-blue2;
+      border-color: $color-surface-blue2;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 6px;
+        top: 2px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:focus {
+      outline: 2px solid $color-surface-blue4;
+      outline-offset: 2px;
+    }
+  }
+
+  label {
+    color: $color-text;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.flex-one {
+  flex: 1;
+}
+
+.used-card-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+}
+
+.important-text {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#waiting-for-signature,
+#signature,
+#waiting-for-confirmation,
+#card-set {
+  display: none;
+
+  div,
+  button,
+  h3 {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+  }
+
+  .loader {
+    margin: 30px 0;
+  }
+
+  button {
+    margin: 20px auto;
+  }
+
+  i {
+    color: $color-status-success1;
+    font-size: 48px;
+  }
+}
+
+.app .card .big-icon.blue {
+  color: $color-status-info1;
+}
+
+.app .row-two .card {
+  flex: 1;
+}
+
+.app .card.red {
+  border: 1px solid $color-status-error2;
+  background-color: $color-status-error3;
+
+  .big-icon,
+  h3 {
+    color: $color-status-error1;
+  }
+
+  .t-background.red {
+    color: #fff;
+    background-color: $color-status-error1;
+    border-color: $color-status-error1;
+  }
+
+  button.light {
+    border: 1px solid $color-status-error1;
+    color: #fff;
+    background-color: $color-status-error1;
+
+    &:hover {
+      background-color: $color-status-error2;
+    }
+  }
+
+  b {
+    color: $color-status-error1;
+  }
+}
+
+.app .card.green {
+  border: 1px solid $color-status-success2;
+  background-color: $color-status-success3;
+
+  .big-icon,
+  h3 {
+    color: $color-status-success1;
+  }
+
+  .t-background.red {
+    color: #fff;
+    background-color: $color-status-success1;
+    border-color: $color-status-success1;
+  }
+
+  button.light {
+    border: 1px solid $color-status-success1;
+    color: #fff;
+    background-color: $color-status-success1;
+
+    &:hover {
+      background-color: $color-status-success2;
+    }
+  }
+
+  b {
+    color: $color-status-success1;
+  }
+}
+
+@media (max-width: 768px) {
+  #zmenit-kartu {
+    .zmena-karty-form {
+      .card-info {
+        flex-direction: column;
+
+        .half-width {
+          width: 100%;
+        }
+      }
+    }
+
+  }
+}
+
+
+/* INVESTICE */
+.card-form.inside {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 1px solid $color-surface-blue5;
+  border-radius: 4px;
+  padding: 0 !important;
+  justify-content: center;
+
+  .info-pair {
+    border-bottom: 1px solid $color-surface-blue5;
+    padding: 3px 16px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .value {
+      text-align: right;
+    }
+  }
+}
+
+.row-three {
+  display: flex;
+  gap: 20px;
+
+  .two-thirds {
+    flex: 1;
+  }
+
+}
+
+.qr-code {
+  max-width: 150px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.investice-table {
+  tbody,thead {
+    tr {
+
+      td,
+      th {
+        text-align: right !important;
+
+        &:nth-child(-n+2) {
+          text-align: left !important;
+        }
+      }
+    }
+  }
+}
+
+.document-content {
+  .t-background {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+}
+
+.document-item {
+  .amount {
+    font-weight: 600;
+    font-size: 16px;
+    color: $color-surface-blue2;
+  }
+}
+
+.card.charts.small {
+  .chart {
+    border-top: 1px solid $color-surface-blue5;
+  }
+
+  .data {
+    border-bottom: none;
+  }
+}
+
+.card.row.banner {
+  padding: 24px 32px;
+
+  h3 {
+    padding-top: 0;
+  }
+
+  button,
+  a.button {
+    max-width: 180px;
+    margin-bottom: 0;
+    margin-left: auto;
+  }
+
+  a {
+    padding: 0;
+  }
+
+  &.blue {
+    background-color: $color-surface-blue2;
+    color: #fff;
+    
+    button {
+      border: none;
+    }
+
+    h3,
+    i {
+      color: #fff;
+    }
+
+  }
+
+  .green {
+    background-color: $color-status-success2;
+
+    h3,
+    i {
+      color: $color-status-success1;
+    }
+  }
+}
+
+.five-cards {
+  $five-cards-gap: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $five-cards-gap;
+
+  .card {
+    flex: 0 1 calc((100% - 4 * #{$five-cards-gap}) / 5);
+    min-width: 200px;
+  }
+
+  .card {
+    padding: 24px;
+    text-align: left;
+
+    h3 {
+      padding-left: 0;
+      color: $color-surface-grey6;
+      padding-top: 20px;
+      padding-right: 0;
+    }
+
+    .amount {
+      color: $color-surface-blue2;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
+
+.big-chart {
+  border-top: 1px solid $color-surface-blue5;
+  padding: 24px;
+
+  .pills {
+    justify-content: center;
+
+    a.button {
+      width: auto;
+      max-width: none;
+    }
+  }
+}
+
+.submenu.simple.extra {
+  padding-bottom: 0;
+}
+
+.row-two {
+  .five-cards {
+    margin-top: 20px;
+
+    .card {
+      margin: 0;
+      align-content: center;
+    }
+  }
+}
+
+.card-form.right {
+  .value {
+    text-align: right;
+  }
+}
+
+.investice-platby-table {
+  border-top: 1px solid $color-border-grey!important;
+  tbody, thead {
+    tr {
+
+      td,
+      th {
+        text-align: left !important;
+
+        &:nth-child(3),
+        &:nth-child(4) {
+          text-align: right !important;
+        }
+      }
+    }
+  }
+}
+
+.document-list {
+  &.no-heading {
+    .document-item:first-child {
+      border-top: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .row-three {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .five-cards .card {
+    min-width: calc(50% - 8px);
+  }
+  .submenu.simple.extra {
+  padding-bottom: 20px;
+  }
+}
+
+.card {
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+    span {
+      align-self: center;
+      height: auto;
+      line-height: normal;
+      
+    }
+  }
+}
+
+.empty-bottom {
+  margin-bottom: 20px;
+}
+
+.cislo-uctu {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  .form-group {
+    &:first-child {
+        width: 50%;
+      }
+  }
+  .lomitko {
+    font-size: 20px;
   }
 }

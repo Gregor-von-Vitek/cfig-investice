@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CFIG Investice - Můj účet</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <script src="js/jquery.min.js"></script>
+    <meta name="format-detection" content="telephone=no, email=no">
+</head>
+
+<body class="app">
+    <div class="message-container"></div>
+    <header>
+        <div class="header-container">
+            <div class="left-side">
+                <div class="logo">
+                    <img src="images/cfig-logo-blue.png" alt="CFIG Logo">
+                </div>
+                <div class="mobile-menu">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="menu-text">Menu</span>
+                </div>
+                <nav class="navigation">
+                    <ul>
+                        <li><a href="#">Přehled</a></li>
+                        <li><a href="#">Investice</a></li>
+                        <li><a href="#">Aktuality</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="user-info">
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="ucet">Tomáš Bulíček</div>
+                <div class="user-name">
+                    <span class="t2 t-blue">Tomáš Bulíček</span>
+                </div>
+                <div class="arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <ul class="user-submenu">
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> Můj účet
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showOverlay('zmenit-heslo-overlay')">
+                        <i class="fas fa-unlock"></i> Změnit heslo
+                    </a>
+                </li>
+
+                <li class="logout">
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i> Odhlásit se
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="submenu">
+            <div class="content-wrapper">
+                <div class="row gap">
+                    <h2>Můj účet</h2>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="active"><a href="#">Osobní údaje</a></li>
+                        <li><a href="#">Žádost o změnu</a></li>
+                    </ul>
+                </nav>
+                <select class="mobile-nav" onchange="location = this.value;">
+                    <option value="#" selected>Osobní údaje</option>
+                    <option value="#">Žádost o změnu</option>
+                </select>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-wrapper">
+                <div class="card">
+                    <h3>Osobní údaje</h3>
+                    <div class="card-form">
+                        <div class="info-pair">
+                            <div class="name">Jméno a příjmení</div>
+                            <div class="value">Simona Šmahelová</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Rodné číslo</div>
+                            <div class="value">7860211235</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Datum narození</div>
+                            <div class="value">21. 2. 1986</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Státní občanství</div>
+                            <div class="value">Česká republika</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Místo narození</div>
+                            <div class="value">Hradec Králové</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Telefon</div>
+                            <div class="value">722388734 <i class="fas fa-edit edit-icon"
+                                    onclick="showOverlay('upravit-telefon-overlay')" title="Upravit telefon"></i></div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">E-mail</div>
+                            <div class="value">simona.smahelova@seznam.cz <i class="fas fa-edit edit-icon"
+                                    onclick="showOverlay('upravit-email-overlay')" title="Upravit e-mail"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Bankovní účet <i class="fas fa-edit edit-icon"
+                            onclick="showOverlay('upravit-bankovni-ucet-overlay')" title="Upravit bankovní účet"></i>
+                    </h3>
+                    <div class="card-form">
+                        <div class="info-pair">
+                            <div class="name">Číslo účtu</div>
+                            <div class="value">4512982053/0800 <i class="far fa-copy" title="Kopírovat"></i></div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Účet vedený u</div>
+                            <div class="value">Československá obchodní banka (ČSOB)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Majetkový účet <i class="fas fa-edit edit-icon"
+                            onclick="showOverlay('upravit-majetkovy-ucet-overlay')" title="Upravit majetkový účet"></i>
+                    </h3>
+                    <div class="card-form">
+                        <div class="info-pair">
+                            <div class="name">Číslo účtu</div>
+                            <div class="value">43-3215478/0800 <i class="far fa-copy" title="Kopírovat"></i></div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Účet vedený u</div>
+                            <div class="value">Komerční banka (KB)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Trvalá adresa <i class="fas fa-edit edit-icon"
+                            onclick="showOverlay('upravit-trvala-adresa-overlay')" title="Upravit trvalou adresu"></i>
+                    </h3>
+                    <div class="card-form">
+                        <div class="info-pair">
+                            <div class="name">Ulice</div>
+                            <div class="value">Československé armády 2548</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Město</div>
+                            <div class="value">Hradec Králové</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">PSČ</div>
+                            <div class="value">500 03</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Doručovací adresa <i class="fas fa-edit edit-icon"
+                            onclick="showOverlay('upravit-dorucovaci-adresa-overlay')"
+                            title="Upravit doručovací adresu"></i></h3>
+                    <div class="card-form">
+                        <div class="info-pair">
+                            <div class="name">Ulice</div>
+                            <div class="value">Československé armády 2548</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">Město</div>
+                            <div class="value">Hradec Králové</div>
+                        </div>
+                        <div class="info-pair">
+                            <div class="name">PSČ</div>
+                            <div class="value">500 03</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>V případě problémů pište na <a href="mailto:partner@cfigcredit.cz">partner@cfigcredit.cz</a> nebo volejte na
+            <a href="tel:464 602 085">464 602 085</a>
+        </p>
+        <p>Všechna práva vyhrazena © 2013 -
+            <script>document.write(new Date().getFullYear());</script> CFIG
+        </p>
+    </footer>
+    <!-- Overlay components -->
+    <div class="overlay-background" id="overlay-background"></div>
+
+    <!-- Side Overlay for Bankovní účet editing -->
+    <div class="side-overlay" id="upravit-bankovni-ucet-overlay">
+        <div class="overlay-header">
+            <h3>Upravit bankovní učet</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Požádejte si o změnu čísla bankovního účtu. Nový účet musí být vedený na jméno investora. Nahraný
+                dokument musí splňovat:</p>
+            <ul>
+                <li>Jedná se o kvalitní <strong>fotografii</strong> nebo <strong>sken</strong></li>
+                <li>Maximální velikost souboru je <strong>10 MB</strong></li>
+                <li>Povolené jsou formáty <strong>JPG</strong> a <strong>PNG</strong></li>
+            </ul>
+            <p>V případě potřeby nás kdykoliv kontaktujte přímo na email <a
+                    href="mailto:dluhopisy@cfigse.com">dluhopisy@cfigse.com</a>.</p>
+
+            <div class="cislo-uctu">
+                <div class="form-group">
+                    <label for="cislo-uctu">Číslo účtu</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="cislo-uctu" value="">
+                    </div>
+                </div>
+                <div class="lomitko">/</div>
+                <div class="form-group">
+                    <label for="kod-banky">Kód banky</label>
+                    <div class="input-wrapper">
+                        <select id="kod-banky">
+                            <option value="0100">0100 - Komerční banka</option>
+                            <option value="0300">0300 - ČSOB</option>
+                            <option value="0800">0800 - Česká spořitelna</option>
+                            <option value="2700">2700 - UniCredit Bank</option>
+                            <option value="6000">6000 - Raiffeisenbank</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="dokument">Nahrát dokument</label>
+                    <div class="file-upload-wrapper empty-bottom">
+                        <input type="file" id="dokument" class="file-upload" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-container">
+                            <button class="light file-upload-button"> <span>Vyberte soubor</span> <i
+                                    class="far fa-folder"></i></button>
+                            <div class="file-info">
+                                <div id="dokument-file-name" class="t3 t-left">dokument-nova.jpg</div>
+                                <i class="fas fa-trash file-delete" id="dokument-file-delete"
+                                    title="Odstranit soubor"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="poznamka-bankovni-ucet">Poznámka</label>
+                <textarea id="poznamka-bankovni-ucet" name="poznamka-bankovni-ucet" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-trvala-adresa">Odeslat požadavek</button>
+            <button class="light" id="cancel-trvala-adresa">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Side Overlay for Majetkový účet editing -->
+    <div class="side-overlay" id="upravit-majetkovy-ucet-overlay">
+        <div class="overlay-header">
+            <h3>Upravit majetkový učet</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Požádejte si o změnu čísla bankovního účtu. Nový účet musí být vedený na jméno investora. Nahraný
+                dokument musí splňovat:</p>
+            <ul>
+                <li>Jedná se o kvalitní <strong>fotografii</strong> nebo <strong>sken</strong></li>
+                <li>Maximální velikost souboru je <strong>10 MB</strong></li>
+                <li>Povolené jsou formáty <strong>JPG</strong> a <strong>PNG</strong></li>
+            </ul>
+            <p>V případě potřeby nás kdykoliv kontaktujte přímo na email <a
+                    href="mailto:dluhopisy@cfigse.com">dluhopisy@cfigse.com</a>.</p>
+
+            <div class="cislo-uctu">
+                <div class="form-group">
+                    <label for="cislo-uctu">Číslo účtu</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="cislo-uctu" value="">
+                    </div>
+                </div>
+                <div class="lomitko">/</div>
+                <div class="form-group">
+                    <label for="kod-banky">Kód banky</label>
+                    <div class="input-wrapper">
+                        <select id="kod-banky">
+                            <option value="0100">0100 - Komerční banka</option>
+                            <option value="0300">0300 - ČSOB</option>
+                            <option value="0800">0800 - Česká spořitelna</option>
+                            <option value="2700">2700 - UniCredit Bank</option>
+                            <option value="6000">6000 - Raiffeisenbank</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="form-group">
+                    <label for="dokument">Nahrát dokument</label>
+                    <div class="file-upload-wrapper empty-bottom">
+                        <input type="file" id="dokument" class="file-upload" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-container">
+                            <button class="light file-upload-button"> <span>Vyberte soubor</span> <i
+                                    class="far fa-folder"></i></button>
+                            <div class="file-info">
+                                <div id="dokument-file-name" class="t3 t-left">dokument-nova.jpg</div>
+                                <i class="fas fa-trash file-delete" id="dokument-file-delete"
+                                    title="Odstranit soubor"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="poznamka-bankovni-ucet">Poznámka</label>
+                <textarea id="poznamka-bankovni-ucet" name="poznamka-bankovni-ucet" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-trvala-adresa">Odeslat požadavek</button>
+            <button class="light" id="cancel-trvala-adresa">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Side Overlay for Trvalá adresa editing -->
+    <div class="side-overlay" id="upravit-trvala-adresa-overlay">
+        <div class="overlay-header">
+            <h3>Upravit trvalou adresu</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Začněte psát do pole níže a z našeptávače vyberte vaši novou trvalou adresu. Pro tuto změnu vyžadujeme
+                ověření občanským průkazem, na kterém je nová adresa uvedena.</p>
+
+            <p>V případě potřeby nás kdykoliv kontaktujte přímo na email <a
+                    href="mailto:info@cfigcredit.cz">info@cfigcredit.cz</a></p>
+
+            <div class="form-group">
+                <label for="trvala-ulice">Ulice</label>
+                <div class="input-wrapper">
+                    <input type="text" id="trvala-ulice" class="form-control" value="Československé armády">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="trvala-cislo-popisne">Číslo popisné</label>
+                <div class="input-wrapper">
+                    <input type="text" id="trvala-cislo-popisne" class="form-control" value="254/8">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="trvala-mesto">Město</label>
+                <div class="input-wrapper">
+                    <input type="text" id="trvala-mesto" class="form-control" value="Hradec Králové">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="trvala-psc">PSČ</label>
+                <div class="input-wrapper">
+                    <input type="text" id="trvala-psc" class="form-control" value="50003">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Občanský průkaz (OP)</h3>
+                <p>Abychom ověřili pravost údajů pro změnu, nahrajte prosím přední a zadní stranu občanského průkazu.
+                    Nahraný doklad musí splňovat:</p>
+                <ul>
+                    <li>Jedná se o kvalitní <strong>fotografii</strong> nebo <strong>sken</strong></li>
+                    <li>Maximální velikost souboru je <strong>10 MB</strong></li>
+                    <li>Povolené jsou formáty <strong>JPG</strong> a <strong>PNG</strong></li>
+                    <li>Foťte z dostatečné blízkosti, aby byly všechny údaje čitelné</li>
+                    <li><a href="#" class="show-photo-example">Jak by měla vypadat ideální fotografie</a></li>
+                </ul>
+
+                <div class="form-group">
+                    <label for="trvala-op-predni">OP - Přední strana</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="trvala-op-predni" class="file-upload" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-container">
+                            <button class="light file-upload-button"> <span>Vyberte soubor</span> <i
+                                    class="far fa-folder"></i></button>
+                            <div class="file-info">
+                                <div id="trvala-file-name-predni" class="t3 t-left">predni-strana-nova.jpg</div>
+                                <i class="fas fa-trash file-delete" id="trvala-file-delete-predni"
+                                    title="Odstranit soubor"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="trvala-op-zadni">OP - Zadní strana</label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="trvala-op-zadni" class="file-upload" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-container">
+                            <button class="light file-upload-button"> <span>Vyberte soubor</span> <i
+                                    class="far fa-folder"></i></button>
+                            <div class="file-info">
+                                <div id="trvala-file-name-zadni" class="t3 t-left">zadni-strana-nova.jpg</div>
+                                <i class="fas fa-trash file-delete" id="trvala-file-delete-zadni"
+                                    title="Odstranit soubor"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="poznamka-trvala-adresa">Poznámka</label>
+                    <textarea id="poznamka-trvala-adresa" name="poznamka-trvala-adresa" rows="4"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-trvala-adresa">Odeslat požadavek</button>
+            <button class="light" id="cancel-trvala-adresa">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Side Overlay for Doručovací adresa editing -->
+    <div class="side-overlay" id="upravit-dorucovaci-adresa-overlay">
+        <div class="overlay-header">
+            <h3>Upravit doručovací adresu</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Začněte psát do pole níže a z našeptávače vyberte vaši novou korespodenční adresu.</p>
+
+            <p>V případě potřeby nás kdykoliv kontaktujte přímo na email <a
+                    href="mailto:info@cfigcredit.cz">info@cfigcredit.cz</a></p>
+
+            <div class="form-group">
+                <label for="dorucovaci-ulice">Ulice</label>
+                <div class="input-wrapper">
+                    <input type="text" id="dorucovaci-ulice" class="form-control" value="Jungmannova">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dorucovaci-cislo-popisne">Číslo popisné</label>
+                <div class="input-wrapper">
+                    <input type="text" id="dorucovaci-cislo-popisne" class="form-control" value="11">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dorucovaci-mesto">Město</label>
+                <div class="input-wrapper">
+                    <input type="text" id="dorucovaci-mesto" class="form-control" value="Hradec Králové">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dorucovaci-psc">PSČ</label>
+                <div class="input-wrapper">
+                    <input type="text" id="dorucovaci-psc" class="form-control" value="50006">
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="poznamka-dorucovaci-adresa">Poznámka</label>
+                <textarea id="poznamka-dorucovaci-adresa" name="poznamka-dorucovaci-adresa" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-dorucovaci-adresa">Uložit</button>
+            <button class="light" id="cancel-dorucovaci-adresa">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Center Overlay for Email editing - Step 1 -->
+    <div class="overlay" id="upravit-email-overlay">
+        <div class="overlay-header">
+            <h3>Upravit e-mail - Krok č.1</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Zadejte nový e-mail pro komunikaci s námi. Po potvrzení vám na stávající e-mail
+                <strong>simona.smahelova@seznam.cz</strong> pošleme kód k potvrzení jeho změny.
+            </p>
+
+            <div class="form-group">
+                <label for="novy-email">Nový e-mail</label>
+                <input type="email" id="novy-email" class="form-control" placeholder="">
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-email">Odeslat požadavek</button>
+            <button class="light" id="cancel-email">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Center Overlay for Telefon editing - Step 1 -->
+    <div class="overlay" id="upravit-telefon-overlay">
+        <div class="overlay-header">
+            <h3>Upravit telefon - Krok č.1</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Zadejte nové telefonní číslo pro komunikaci s námi. Po potvrzení vám na stávající číslo -
+                <strong>722688734</strong> - pošleme kód k potvrzení jeho změny.
+            </p>
+
+            <div class="form-group">
+                <label for="nove-telefonni-cislo">Nové telefonní číslo</label>
+                <input type="tel" id="nove-telefonni-cislo" class="form-control" placeholder="">
+            </div>
+            <p class="note">Bez předvolby a mezer</p>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="submit-telefon">Odeslat požadavek</button>
+            <button class="light" id="cancel-telefon">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Center Overlay for Email editing - Step 2 -->
+    <div class="overlay" id="upravit-email-overlay-step2">
+        <div class="overlay-header">
+            <h3>Upravit e-mail - Krok č.2</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Do pole níže vložte ověřovací kód, který vám byl doručen na stávající e-mail
+                <strong>simona.smahelova@seznam.cz</strong>. Po potvrzení bude nové číslo 724123456 aktivováno.
+            </p>
+
+            <div class="form-group">
+                <label for="overovaci-kod-email">Potvrzovací kód</label>
+                <input type="text" id="overovaci-kod-email" class="form-control" placeholder="">
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="potvrdit-email">Potvrdit změnu</button>
+            <button class="light" id="zrusit-email">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Center Overlay for Telefon editing - Step 2 -->
+    <div class="overlay" id="upravit-telefon-overlay-step2">
+        <div class="overlay-header">
+            <h3>Upravit telefon - Krok č.2</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Do pole níže vložte ověřovací kód, který vám byl doručen na stávající telefonní číslo -
+                <strong>722688734</strong>. Po potvrzení bude nové číslo – 724123456 – aktivováno.
+            </p>
+
+            <div class="form-group">
+                <label for="overovaci-kod-telefon">Potvrzovací kód</label>
+                <input type="text" id="overovaci-kod-telefon" class="form-control" placeholder="">
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue" id="potvrdit-telefon">Potvrdit změnu</button>
+            <button class="light" id="zrusit-telefon">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Photo Example Overlay -->
+    <div class="overlay" id="photo-example-overlay">
+        <div class="overlay-header">
+            <h3>Ideální fotografie</h3>
+            <i class="fas fa-times close-photo-example" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <div class="example-photo-container">
+                <img src="images/id-card-example.png" alt="Ukázka ideální fotografie občanského průkazu"
+                    class="example-photo">
+                Doklady prosím foťte:
+                <ul>
+                    <li>kolmo zeshora a bez úhlu naklonění</li>
+                    <li>ideálně na jednobarevném podkladu</li>
+                    <li>v ideálních světelných podmínkách bez odlesků</li>
+                </ul>
+            </div>
+        </div>
+        <div class="overlay-actions">
+            <button class="light close-photo-example">Zavřít</button>
+        </div>
+    </div>
+
+    <!-- Secondary Overlay Background (for stacked modals) -->
+    <div class="overlay-background" id="secondary-overlay-background"></div>
+
+    <!-- Center Overlay for Password Change -->
+    <div class="overlay" id="zmenit-heslo-overlay">
+        <div class="overlay-header">
+            <h3>Nastavit nové heslo</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <form>
+                <div class="form-row">
+                    <label for="new-password">Nové heslo</label>
+                    <div class="password-field">
+                        <input type="password" id="new-password" name="new-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="password-rules">
+                        <label><i class="far fa-circle"></i> Minimálně 8 znaků</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno velké písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno malé písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno číslo</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="confirm-password">Nové heslo znovu</label>
+                    <div class="password-field">
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue login-button" id="submit-heslo" disabled>Nastavit nové heslo</button>
+            <button class="light" id="cancel-heslo">Zrušit</button>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>
+
+</html>

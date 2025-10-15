@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CFIG Investice - Přehled</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <script src="js/jquery.min.js"></script>
+    <meta name="format-detection" content="telephone=no, email=no">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="app ">
+    <div class="message-container"></div>
+    <header>
+        <div class="header-container">
+            <div class="left-side">
+                <div class="logo">
+                    <img src="images/cfig-logo-blue.png" alt="CFIG Logo">
+                </div>
+                <div class="mobile-menu">
+                    <span class="hamburger-icon">☰</span>
+                    <span class="menu-text">Menu</span>
+                </div>
+                <nav class="navigation">
+                    <ul>
+                        <li class="active"><a href="#">Přehled</a></li>
+                        <li><a href="#">Investice</a></li>
+                        <li><a href="#">Aktuality</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="user-info">
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="ucet">Tomáš Bulíček</div>
+                <div class="user-name">
+                    <span class="t2 t-blue">Tomáš Bulíček</span>
+                </div>
+                <div class="arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <ul class="user-submenu">
+                <li>
+                    <a href="#">
+                        <i class="fas fa-user-circle"></i> Můj účet
+                    </a>
+                </li>
+                <li>
+                    <a href="#" onclick="showOverlay('zmenit-heslo-overlay')">
+                        <i class="fas fa-unlock"></i> Změnit heslo
+                    </a>
+                </li>
+
+                <li class="logout">
+                    <a href="#">
+                        <i class="fas fa-sign-out-alt"></i> Odhlásit se
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="submenu filters">
+            <div class="content-wrapper-big">
+                <div class="row">
+                    <div class="left">
+                        <h2>Přehled</h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="content-wrapper-big">
+
+                <div class="card row banner green">
+                    <i class="far fa-file-signature big-icon "></i>
+                    <div>
+                        <h3>Nová smlouva připravena</h3>
+                        <p>Máme pro vás připravenou smlouvu k investici Delta Holdings – Bytový dům Pardubice.</p>
+                    </div>
+
+                    <a href="#" class="button"><button class="light">Přejít na smlouvu</button></a>
+                </div>
+
+                <div class="five-cards">
+                    <div class="card">
+                        <i class="far fa-coin-blank big-icon"></i>
+                        <h3>Celkové investice</h3>
+                        <div class="amount">320 000 Kč</div>
+                    </div>
+                    <div class="card">
+                        <i class="far fa-coins big-icon"></i>
+                        <h3>Získaný úrok</h3>
+                        <div class="amount">20 000 Kč</div>
+                    </div>
+                    <div class="card">
+                        <i class="far fa-money-bill-trend-up big-icon"></i>
+                        <h3>Úrok k vyplacení</h3>
+                        <div class="amount">20 000 Kč</div>
+                    </div>
+                    <div class="card">
+                        <i class="far fa-money-bill-trend-up big-icon"></i>
+                        <h3>Měsíční úroky</h3>
+                        <div class="amount">8 000 Kč</div>
+                    </div>
+                    <div class="card">
+                        <i class="far fa-money-from-bracket big-icon"></i>
+                        <h3>Příští výplata úroku</h3>
+                        <div class="amount">4.10.2025</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Přehled všech úroků</h3>
+                    <div class="big-chart">
+                        <div class="pills">
+                            <a href="#" class="button blue pills-toggle" data-target="ziskane">Doposud získaný úrok (od
+                                počátku)</a>
+                            <a href="#" class="button light pills-toggle" data-target="k-vyplaceni">Úrok k vyplacení (do
+                                splatnosti)</a>
+                        </div>
+                        <div class="chart">
+                            <div class="data" style="height: 340px;">
+                                <canvas id="urokyChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-two">
+                    <div class="card charts small list">
+                        <h3>Rozložení investic</h3>
+                        <div class="chart">
+                            <div class="data">
+                                <div class="chart-vizualization" id="chart-provize">
+                                    <canvas id="provizeChart"></canvas>
+                                </div>
+                                <div class="legend">
+                                    <!-- Legend rows will be generated dynamically by script -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card small list">
+                        <h3>Poslední investice</h3>
+                        <div class="document-list">
+                            <a href="#" class="document-item">
+                                <i class="far fa-display-chart-up-circle-dollar document-icon"></i>
+                                <div class="document-content">
+                                    <span class="t-background green">Aktivní</span>
+                                    <div class="document-name ">Dluhopisy CFIG SE VI/2025-3Y</div>
+                                    <span class="document-date">Úrok: 4.25% / Datum investice: 10. 1. 2024</span>
+                                </div>
+                                <div class="amount">70 000 Kč</div>
+                            </a>
+                            <a href="#" class="document-item">
+                                <i class="far fa-display-chart-up-circle-dollar document-icon"></i>
+                                <div class="document-content">
+                                    <span class="t-background yellow">Blížící se splatnost</span>
+                                    <div class="document-name ">Dluhopisy CFIG SE VI/2025-3Y</div>
+                                    <span class="document-date">Úrok: 14.25% / Datum investice: 08. 11. 2024</span>
+                                </div>
+                                <div class="amount">100 000 Kč</div>
+                            </a>
+                            <a href="#" class="document-item">
+                                <i class="far fa-display-chart-up-circle-dollar document-icon"></i>
+                                <div class="document-content">
+                                    <span class="t-background green">Doplaceno</span>
+                                    <div class="document-name ">Dluhopisy CFIG SE VI/2025-3Y</div>
+                                    <span class="document-date">Úrok: 5.25% / Datum investice: 13. 2. 2024</span>
+                                </div>
+                                <div class="amount">170 000 Kč</div>
+                            </a>
+                        </div>
+                        <div class="show-all">
+                            <a href="#" class="button text">
+                                Všechny investice <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>V případě problémů pište na <a href="mailto:partner@cfigcredit.cz">partner@cfigcredit.cz</a> nebo volejte na
+            <a href="tel:464 602 085">464 602 085</a>
+        </p>
+        <p>Všechna práva vyhrazena © 2013 -
+            <script>document.write(new Date().getFullYear());</script> CFIG
+        </p>
+    </footer>
+    <!-- Secondary Overlay Background (for stacked modals) -->
+    <div class="overlay-background" id="secondary-overlay-background"></div>
+    <div class="overlay-background" id="overlay-background"></div>
+    <!-- Side Overlay for Vytvořit žádost -->
+    <div class="side-overlay" id="vytvorit-zadost-overlay">
+        <div class="overlay-header">
+            <h3>Vytvořit žádost o úvěr</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+
+            <div class="form-group ">
+                <label for="rodne-cislo">Rodné číslo</label>
+                <div class="input-wrapper">
+                    <input type="text" id="rodne-cislo" name="rodne-cislo" placeholder="" />
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+            <div class="form-row split">
+                <div class="form-group ">
+                    <label for="jmeno">Jméno</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="jmeno" name="jmeno" placeholder="" />
+                        <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label for="prijmeni">Příjmení</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="prijmeni" name="prijmeni" placeholder="" />
+                        <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="email">E-mail</label>
+                <div class="input-wrapper">
+                    <input type="email" id="email" name="email" placeholder="" />
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+            <div class="form-group ">
+                <label for="telefon">Telefon</label>
+                <div class="input-wrapper">
+                    <input type="text" id="telefon" name="telefon" placeholder="" />
+                    <div class="validation-icon"><i class="fas fa-check-circle"></i></div>
+                </div>
+            </div>
+
+            <p>Po vytvoření žádosti si kolegové z klientského centra převezmou vaši žádost a vyhodnotí, jestli je vhodné
+                klienta oslovit nebo ne. V kladném případě obdrží klient odkaz pro vstup do online úvěrového procesu a
+                veškerý postup poté můžete sledovat na stránce “Smlouvy”.
+            </p>
+            <p>Pro podrobnější informace kontaktujte <a href="mailto:partner@cfigcredit.cz">partner@cfigcredit.cz</a>.
+            </p>
+
+        </div>
+        <div class="overlay-actions">
+            <input type="submit" class="button blue" id="submit-zadost-request" value="Vytvořit"></input>
+            <button class="light" id="cancel-zadost-request">Zrušit</button>
+        </div>
+    </div>
+
+
+    <!-- Center Overlay for Chci investovat -->
+    <div class="overlay" id="chci-investovat-overlay">
+        <div class="overlay-header">
+            <h3>Chci investovat</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <p>Těší nás, že máte zájem o investování s CFIG. Dejte nám prosím vědět, jakou částku plánujete investovat,
+                a případně i čas, kdy vás můžeme nejlépe telefonicky zastihnout.</p>
+            <form>
+                <div class="form-row">
+                    <label for="investice-castka">Částka pro investici (Kč)</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="investice-castka">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="investice-cas">Preferované datum a čas kontaktu</label>
+                    <div class="input-wrapper">
+                        <input type="text" name="investice-cas">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue">Odeslat</button>
+            <button class="light" id="cancel-heslo">Zrušit</button>
+        </div>
+    </div>
+
+    <!-- Center Overlay for Password Change -->
+    <div class="overlay" id="zmenit-heslo-overlay">
+        <div class="overlay-header">
+            <h3>Nastavit nové heslo</h3>
+            <i class="fas fa-times close-overlay" aria-label="Zavřít"></i>
+        </div>
+        <div class="overlay-content">
+            <form>
+                <div class="form-row">
+                    <label for="new-password">Nové heslo</label>
+                    <div class="password-field">
+                        <input type="password" id="new-password" name="new-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="password-rules">
+                        <label><i class="far fa-circle"></i> Minimálně 8 znaků</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno velké písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno malé písmeno</label>
+                        <label><i class="far fa-circle"></i> Alespoň jedno číslo</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label for="confirm-password">Nové heslo znovu</label>
+                    <div class="password-field">
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <i class="fas fa-eye show-password"></i>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="overlay-actions">
+            <button class="blue login-button" id="submit-heslo" disabled>Nastavit nové heslo</button>
+            <button class="light" id="cancel-heslo">Zrušit</button>
+        </div>
+    </div>
+</body>
+<script src="js/main.js"></script>
+<script>
+    $(function () {
+        Chart.register({
+            id: 'centerText',
+            afterDatasetsDraw: function (chart) {
+                if (chart.config.options.centerText) {
+                    const ctx = chart.ctx;
+                    const centerText = chart.config.options.centerText.text;
+                    const fontSize = chart.config.options.centerText.fontSize || '14px';
+                    const fontFamily = chart.config.options.centerText.fontFamily || "'ITC Avant Garde Pro', 'Open Sans', sans-serif";
+                    const color = chart.config.options.centerText.color || '#1B526E';
+
+                    ctx.save();
+                    ctx.font = fontSize + " " + fontFamily;
+                    ctx.fillStyle = color;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    const lines = centerText.split('\n');
+                    const lineHeight = parseInt(fontSize, 10) + 10;
+                    const meta = chart.getDatasetMeta(0).data[0];
+                    const centerX = meta.x;
+                    const centerY = meta.y - ((lines.length - 1) / 2) * lineHeight;
+
+                    lines.forEach((line, i) => {
+                        ctx.fillText(line, centerX, centerY + i * lineHeight);
+                    });
+
+                    ctx.restore();
+                }
+            }
+        });
+
+        // Helper: Vytvoř unikátní barvy pro koláčový graf
+        function generateDistinctColors(n, s = 65, l = 55) {
+            const colors = [];
+            for (let i = 0; i < n; i++) {
+                const hue = Math.round((360 / Math.max(1, n)) * i);
+                colors.push(`hsl(${hue} ${s}% ${l}%)`);
+            }
+            return colors;
+        }
+
+        // Helper: formátování CZK měny s nezlomitelnou mezerou
+        function formatCZK(value) {
+            try {
+                return new Intl.NumberFormat('cs-CZ').format(value) + ' Kč';
+            } catch (e) {
+                return (value + '').replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0') + ' Kč';
+            }
+        }
+
+        // DATA Z BACKENDU
+        // Rozložení investic - koláčový graf
+        const labels = ['Dluhopisy CFIG SE IX/2025-3Y', 'Dluhopisy CFIG SE IX/2024-2H', 'Dluhopisy CFIG SE IX/2020-9J'];
+        const values = [27000, 13500, 13500];
+        const colors = generateDistinctColors(labels.length);
+        const total = values.reduce((acc, v) => acc + (Number(v) || 0), 0);
+
+        // Vytvoření legendy pro koláčový graf
+        const $legend = $('.legend');
+        $legend.empty();
+        labels.forEach((label, i) => {
+            const amount = values[i] || 0;
+            const rowHtml = `
+                <div class="row">
+                    <div class="left">
+                        <span class="color" style="background-color: ${colors[i]};"></span>
+                        ${label}
+                    </div>
+                    <div class="right">
+                        <span class="count">${formatCZK(amount)}</span>
+                    </div>
+                </div>`;
+            $legend.append(rowHtml);
+        });
+
+        // Zobrazení grafu - Rozložení investic
+        const ctx = document.getElementById('provizeChart');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: colors,
+                }]
+            },
+            options: {
+                cutout: '80%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: true }
+                },
+                centerText: {
+                    text: `Celkem provize\n${formatCZK(total)}`
+                }
+            }
+        });
+
+        // ============================
+        // Přehled všech úroků (Line/Area graf)
+        // ============================
+        const urokyCtx = document.getElementById('urokyChart');
+        if (urokyCtx) {
+            // DATA Z BACKENDU - měsíce
+            const timeline = ['3/2025', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1/2026', '2', '3', '4', '5', '6', '7', '8'];
+
+            // DATA Z BACKENDU - "Doposud získaný úrok (od počátku)"
+            const ziskaneData = [0, 5000, 12000, 19000, 26000, 32000, 38000, 43000, 47000, 60000, 68000, 72000, 76000, 80000, 86000, 90000, 94000, 96000];
+
+            // DATA Z BACKENDU - "Úrok k vyplacení (do splatnosti)"
+            const kVyplaceniData = [0, 6000, 11000, 17000, 23000, 29000, 36000, 42000, 47000, 52000, 59000, 65000, 70000, 74000, 79000, 84000, 90000, 93000];
+
+            // Vypočítání počtu horizontálních pozic a kroků na Y ose
+            function computeYAxisParams(data, targetTicks = 10) {
+                const max = Math.max(0, ...data);
+                if (max === 0) {
+                    return { step: 1, suggestedMax: 10 };
+                }
+                // Zajistíme, že krok bude alespoň 1000 a bude násobkem 1000
+                let step = Math.max(1000, Math.ceil(max / targetTicks / 1000) * 1000);
+                let suggestedMax = Math.ceil(max / step) * step;
+                // Pokud je počet kroků příliš malý, automaticky zvýšit
+                let ticks = Math.ceil(suggestedMax / step);
+                if (ticks < targetTicks - 2) {
+                    step = Math.max(1000, Math.ceil(max / (targetTicks - 2) / 1000) * 1000);
+                    suggestedMax = Math.ceil(max / step) * step;
+                }
+                return { step, suggestedMax };
+            }
+
+            let yAxisParams = computeYAxisParams(ziskaneData);
+
+            // Zobrazení grafu - Přehled všech úroků
+            const urokyChart = new Chart(urokyCtx, {
+                type: 'line',
+                data: {
+                    labels: timeline,
+                    datasets: [{
+                        label: 'Doposud získaný úrok (od počátku)',
+                        data: ziskaneData,
+                        fill: true,
+                        tension: 0.3,
+                        borderColor: '#1B526E',
+                        backgroundColor: 'rgba(65, 113, 144, 0.25)', // light blue area
+                        pointRadius: 0,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#657786' }
+                        },
+                        y: {
+                            grid: { color: '#E6EEF3' },
+                            suggestedMin: 0,
+                            suggestedMax: yAxisParams.suggestedMax,
+                            ticks: {
+                                stepSize: yAxisParams.step,
+                                autoSkip: false,
+                                maxTicksLimit: 12,
+                                padding: 4,
+                                font: { size: 12 },
+                                callback: (val) => formatCZK(val).replace('\u00A0', ' ')
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'bottom', align: 'center', labels: { padding: 12 } },
+                        tooltip: {
+                            callbacks: {
+                                title: (items) => `Úroky za období ${items[0].label}`,
+                                label: (item) => `Suma všech úroků: ${formatCZK(item.parsed.y)}`
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Přepínání mezi grafy
+            $('.pills-toggle').on('click', function (e) {
+                e.preventDefault();
+                const target = $(this).data('target');
+
+                $('.pills-toggle').removeClass('blue').addClass('light');
+                $(this).addClass('blue').removeClass('light');
+
+                if (target === 'ziskane') {
+                    urokyChart.data.datasets[0].label = 'Doposud získaný úrok (od počátku)';
+                    urokyChart.data.datasets[0].data = ziskaneData;
+                    urokyChart.data.datasets[0].borderColor = '#1B526E';
+                    urokyChart.data.datasets[0].backgroundColor = 'rgba(65, 113, 144, 0.25)';
+                } else {
+                    urokyChart.data.datasets[0].label = 'Úrok k vyplacení (do splatnosti)';
+                    urokyChart.data.datasets[0].data = kVyplaceniData;
+                    urokyChart.data.datasets[0].borderColor = '#9C7A16';
+                    urokyChart.data.datasets[0].backgroundColor = 'rgba(202, 169, 66, 0.25)'; // light gold area
+                }
+                // Přepočítání Y osy podle aktivních dat
+                const activeData = target === 'ziskane' ? ziskaneData : kVyplaceniData;
+                yAxisParams = computeYAxisParams(activeData);
+                urokyChart.options.scales.y.suggestedMax = yAxisParams.suggestedMax;
+                urokyChart.options.scales.y.ticks.stepSize = yAxisParams.step;
+                urokyChart.update();
+            });
+        }
+    });
+</script>
+
+</html>
