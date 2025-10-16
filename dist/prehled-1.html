@@ -307,15 +307,19 @@
             }
         });
 
-        // Helper: Vytvoř unikátní barvy pro koláčový graf
-        function generateDistinctColors(n, s = 65, l = 55) {
-            const colors = [];
-            for (let i = 0; i < n; i++) {
-                const hue = Math.round((360 / Math.max(1, n)) * i);
-                colors.push(`hsl(${hue} ${s}% ${l}%)`);
-            }
-            return colors;
-        }
+        // Pevně daná paleta 10 barev (HEX)
+        const COLOR_PALETTE = [
+            '#4BC0C0', // teal
+            '#9966FF', // purple
+            '#FF6384', // pink/red
+            '#36A2EB', // blue
+            '#FFCD56', // yellow
+            '#2ecc71', // green
+            '#e67e22', // orange
+            '#9b59b6', // violet
+            '#34495e', // dark blue-gray
+            '#e74c3c'  // red
+        ];
 
         // Helper: formátování CZK měny s nezlomitelnou mezerou
         function formatCZK(value) {
@@ -328,9 +332,16 @@
 
         // DATA Z BACKENDU
         // Rozložení investic - koláčový graf
-        const labels = ['Dluhopisy CFIG SE IX/2025-3Y', 'Dluhopisy CFIG SE IX/2024-2H', 'Dluhopisy CFIG SE IX/2020-9J'];
-        const values = [27000, 13500, 13500];
-        const colors = generateDistinctColors(labels.length);
+        const labels = [
+            'Dluhopisy CFIG SE IX/2025-3Y',
+            'Dluhopisy CFIG SE IX/2024-2H',
+            'Dluhopisy CFIG SE IX/2020-9J',
+            'Dluhopisy CFIG SE VIII/2025-3Y',
+            'Dluhopisy CFIG SE VII/2024-1Y',
+            'Dluhopisy CFIG SE VI/2023-2Y'
+        ];
+        const values = [27000, 13500, 13500, 20000, 8000, 5000];
+    const colors = labels.map((_, i) => COLOR_PALETTE[i % COLOR_PALETTE.length]);
         const total = values.reduce((acc, v) => acc + (Number(v) || 0), 0);
 
         // Vytvoření legendy pro koláčový graf
@@ -375,18 +386,60 @@
         });
 
         // ============================
-        // Přehled všech úroků (Line/Area graf)
+        // Přehled všech úroků (Line/Area graf) z aktivních investic
         // ============================
         const urokyCtx = document.getElementById('urokyChart');
         if (urokyCtx) {
-            // DATA Z BACKENDU - měsíce
+            // DATA Z BACKENDU - časová osa (měsíce)
             const timeline = ['3/2025', '4', '5', '6', '7', '8', '9', '10', '11', '12', '1/2026', '2', '3', '4', '5', '6', '7', '8'];
+            // Převeď timeline na formát MM/YYYY pro tooltipy (zachytí přesahy roku)
+            function normalizeTimelineToMonthYear(labels) {
+                let currentYear = null;
+                let prevMonth = null;
+                return labels.map((lbl) => {
+                    let month, year;
+                    if (String(lbl).includes('/')) {
+                        const parts = String(lbl).split('/');
+                        month = parseInt(parts[0], 10);
+                        year = parseInt(parts[1], 10);
+                    } else {
+                        month = parseInt(lbl, 10);
+                        // Pokud rok není dosud znám, zkusíme použít aktuální rok
+                        year = currentYear ?? new Date().getFullYear();
+                        // Pokud dojde k poklesu měsíce, znamená to přechod na nový rok
+                        if (prevMonth !== null && month < prevMonth) {
+                            year = (currentYear ?? year) + 1;
+                        }
+                    }
+                    currentYear = year;
+                    prevMonth = month;
+                    return `${month}/${year}`;
+                });
+            }
+            const timelineMonthYear = normalizeTimelineToMonthYear(timeline);
 
-            // DATA Z BACKENDU - "Doposud získaný úrok (od počátku)"
-            const ziskaneData = [0, 5000, 12000, 19000, 26000, 32000, 38000, 43000, 47000, 60000, 68000, 72000, 76000, 80000, 86000, 90000, 94000, 96000];
+            // DATA Z BACKENDU - aktivní investice (měsíční úroky)
+            // Každá investice má název a pole měsíčních hodnot zarovnaných s timeline
+            const investmentsZiskane = [
+                { name: 'Dluhopisy CFIG SE IX/2025-3Y', monthly: [0, 3000, 1500, 2000, 2500, 1500, 2000, 2500, 2000, 13000, 8000, 4000, 4000, 4000, 6000, 4000, 4000, 2000] },
+                { name: 'Dluhopisy CFIG SE VIII/2025-3Y', monthly: [0, 2000, 0, 0, 0, 1500, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+            ];
 
-            // DATA Z BACKENDU - "Úrok k vyplacení (do splatnosti)"
-            const kVyplaceniData = [0, 6000, 11000, 17000, 23000, 29000, 36000, 42000, 47000, 52000, 59000, 65000, 70000, 74000, 79000, 84000, 90000, 93000];
+            // Volitelná data pro přepínač "k vyplacení" (pokud je používáno)
+            const investmentsKVyplaceni = [
+                { name: 'Dluhopisy CFIG SE IX/2025-3Y', monthly: [3000, 1500, 2000, 2500, 1500, 2000, 2500, 2000, 1500, 2500, 2500, 3000, 3500, 3500, 3500, 3500, 3500, 3000] },
+                { name: 'Dluhopisy CFIG SE VIII/2025-3Y', monthly: [2000, 0, 0, 0, 1500, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
+            ];
+
+            // Pomocné funkce
+            function sumMonthly(investments) {
+                return timeline.map((_, idx) =>
+                    investments.reduce((acc, inv) => acc + (Number(inv.monthly[idx]) || 0), 0)
+                );
+            }
+            function cumulative(arr) {
+                let s = 0; return arr.map(v => (s += (Number(v) || 0)));
+            }
 
             // Vypočítání počtu horizontálních pozic a kroků na Y ose
             function computeYAxisParams(data, targetTicks = 10) {
@@ -406,7 +459,11 @@
                 return { step, suggestedMax };
             }
 
-            let yAxisParams = computeYAxisParams(ziskaneData);
+            // Aktivní datová sada (výchozí: získané úroky)
+            let activeInvestments = investmentsZiskane;
+            let combinedMonthly = sumMonthly(activeInvestments);
+            let combinedCumulative = cumulative(combinedMonthly);
+            let yAxisParams = computeYAxisParams(combinedCumulative);
 
             // Zobrazení grafu - Přehled všech úroků
             const urokyChart = new Chart(urokyCtx, {
@@ -415,18 +472,21 @@
                     labels: timeline,
                     datasets: [{
                         label: 'Doposud získaný úrok (od počátku)',
-                        data: ziskaneData,
+                        data: combinedCumulative,
                         fill: true,
                         tension: 0.3,
                         borderColor: '#1B526E',
                         backgroundColor: 'rgba(65, 113, 144, 0.25)', // light blue area
                         pointRadius: 0,
+                        pointHitRadius: 12,
+                        pointHoverRadius: 4,
                         borderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
                     scales: {
                         x: {
                             grid: { display: false },
@@ -449,9 +509,26 @@
                     plugins: {
                         legend: { display: true, position: 'bottom', align: 'center', labels: { padding: 12 } },
                         tooltip: {
+                            enabled: true,
+                            displayColors: false,
                             callbacks: {
-                                title: (items) => `Úroky za období ${items[0].label}`,
-                                label: (item) => `Suma všech úroků: ${formatCZK(item.parsed.y)}`
+                                title: (items) => {
+                                    const idx = items[0].dataIndex;
+                                    return `Úroky za období ${timelineMonthYear[idx]}`;
+                                },
+                                // Hlavní řádek: kumulativní hodnota do aktuálního měsíce
+                                label: (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulative[item.dataIndex])}`,
+                                // Další řádky: součet za měsíc a hodnoty jednotlivých investic
+                                afterBody: (items) => {
+                                    const idx = items[0].dataIndex;
+                                    const lines = [];
+                                    lines.push(`Získané úroky celkem za období: ${formatCZK(combinedMonthly[idx])}`);
+                                    activeInvestments.forEach(inv => {
+                                        const val = Number(inv.monthly[idx]) || 0;
+                                        lines.push(`${inv.name}: ${formatCZK(val)}`);
+                                    });
+                                    return lines;
+                                }
                             }
                         }
                     }
@@ -467,21 +544,37 @@
                 $(this).addClass('blue').removeClass('light');
 
                 if (target === 'ziskane') {
+                    activeInvestments = investmentsZiskane;
                     urokyChart.data.datasets[0].label = 'Doposud získaný úrok (od počátku)';
-                    urokyChart.data.datasets[0].data = ziskaneData;
                     urokyChart.data.datasets[0].borderColor = '#1B526E';
                     urokyChart.data.datasets[0].backgroundColor = 'rgba(65, 113, 144, 0.25)';
                 } else {
+                    activeInvestments = investmentsKVyplaceni;
                     urokyChart.data.datasets[0].label = 'Úrok k vyplacení (do splatnosti)';
-                    urokyChart.data.datasets[0].data = kVyplaceniData;
                     urokyChart.data.datasets[0].borderColor = '#9C7A16';
                     urokyChart.data.datasets[0].backgroundColor = 'rgba(202, 169, 66, 0.25)'; // light gold area
                 }
-                // Přepočítání Y osy podle aktivních dat
-                const activeData = target === 'ziskane' ? ziskaneData : kVyplaceniData;
-                yAxisParams = computeYAxisParams(activeData);
+
+                // Rekombinace dat a Y osy pro aktivní investice
+                combinedMonthly = sumMonthly(activeInvestments);
+                combinedCumulative = cumulative(combinedMonthly);
+                urokyChart.data.datasets[0].data = combinedCumulative;
+                yAxisParams = computeYAxisParams(combinedCumulative);
                 urokyChart.options.scales.y.suggestedMax = yAxisParams.suggestedMax;
                 urokyChart.options.scales.y.ticks.stepSize = yAxisParams.step;
+
+                // Aktualizace tooltip callbacků pro novou datovou sadu
+                urokyChart.options.plugins.tooltip.callbacks.label = (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulative[item.dataIndex])}`;
+                urokyChart.options.plugins.tooltip.callbacks.afterBody = (items) => {
+                    const idx = items[0].dataIndex;
+                    const lines = [];
+                    lines.push(`Získané úroky celkem za období: ${formatCZK(combinedMonthly[idx])}`);
+                    activeInvestments.forEach(inv => {
+                        const val = Number(inv.monthly[idx]) || 0;
+                        lines.push(`${inv.name}: ${formatCZK(val)}`);
+                    });
+                    return lines;
+                };
                 urokyChart.update();
             });
         }
