@@ -421,7 +421,7 @@
             // DATA Z BACKENDU - aktivní investice (měsíční úroky)
             // Každá investice má název a pole měsíčních hodnot zarovnaných s timeline
             const investmentsZiskane = [
-                { name: 'Dluhopisy CFIG SE IX/2025-3Y', monthly: [0, 3000, 1500, 2000, 2500, 1500, 2000, 2500, 2000, 13000, 8000, 4000, 4000, 4000, 6000, 4000, 4000, 2000] },
+                { name: 'Dluhopisy CFIG SE IX/2025-3Y', monthly: [4500, 3000, 1500, 2000, 2500, 1500, 2000, 2500, 2000, 13000, 8000, 4000, 4000, 4000, 6000, 4000, 4000, 2000] },
                 { name: 'Dluhopisy CFIG SE VIII/2025-3Y', monthly: [0, 2000, 0, 0, 0, 1500, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }
             ];
 
@@ -459,11 +459,15 @@
                 return { step, suggestedMax };
             }
 
+            // Počáteční (baseline) hodnota – přičítá se k součtům po měsících
+            const baselineAmount = 80000; // TODO: načíst z backendu
+
             // Aktivní datová sada (výchozí: získané úroky)
             let activeInvestments = investmentsZiskane;
             let combinedMonthly = sumMonthly(activeInvestments);
             let combinedCumulative = cumulative(combinedMonthly);
-            let yAxisParams = computeYAxisParams(combinedCumulative);
+            let combinedCumulativeWithBaseline = combinedCumulative.map(v => v + baselineAmount);
+            let yAxisParams = computeYAxisParams(combinedCumulativeWithBaseline);
 
             // Zobrazení grafu - Přehled všech úroků
             const urokyChart = new Chart(urokyCtx, {
@@ -472,7 +476,7 @@
                     labels: timeline,
                     datasets: [{
                         label: 'Doposud získaný úrok (od počátku)',
-                        data: combinedCumulative,
+                        data: combinedCumulativeWithBaseline,
                         fill: true,
                         tension: 0.3,
                         borderColor: '#1B526E',
@@ -516,8 +520,8 @@
                                     const idx = items[0].dataIndex;
                                     return `Úroky za období ${timelineMonthYear[idx]}`;
                                 },
-                                // Hlavní řádek: kumulativní hodnota do aktuálního měsíce
-                                label: (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulative[item.dataIndex])}`,
+                                // Hlavní řádek: kumulativní hodnota do aktuálního měsíce včetně baseline
+                                label: (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulativeWithBaseline[item.dataIndex])}`,
                                 // Další řádky: součet za měsíc a hodnoty jednotlivých investic
                                 afterBody: (items) => {
                                     const idx = items[0].dataIndex;
@@ -558,13 +562,23 @@
                 // Rekombinace dat a Y osy pro aktivní investice
                 combinedMonthly = sumMonthly(activeInvestments);
                 combinedCumulative = cumulative(combinedMonthly);
-                urokyChart.data.datasets[0].data = combinedCumulative;
-                yAxisParams = computeYAxisParams(combinedCumulative);
+                if (target === 'ziskane') {
+                    combinedCumulativeWithBaseline = combinedCumulative.map(v => v + baselineAmount);
+                    urokyChart.data.datasets[0].data = combinedCumulativeWithBaseline;
+                    yAxisParams = computeYAxisParams(combinedCumulativeWithBaseline);
+                } else {
+                    urokyChart.data.datasets[0].data = combinedCumulative;
+                    yAxisParams = computeYAxisParams(combinedCumulative);
+                }
                 urokyChart.options.scales.y.suggestedMax = yAxisParams.suggestedMax;
                 urokyChart.options.scales.y.ticks.stepSize = yAxisParams.step;
 
                 // Aktualizace tooltip callbacků pro novou datovou sadu
-                urokyChart.options.plugins.tooltip.callbacks.label = (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulative[item.dataIndex])}`;
+                if (target === 'ziskane') {
+                    urokyChart.options.plugins.tooltip.callbacks.label = (item) => `Hodnota úroků (od počátku): ${formatCZK((combinedCumulative[item.dataIndex] || 0) + baselineAmount)}`;
+                } else {
+                    urokyChart.options.plugins.tooltip.callbacks.label = (item) => `Hodnota úroků (od počátku): ${formatCZK(combinedCumulative[item.dataIndex])}`;
+                }
                 urokyChart.options.plugins.tooltip.callbacks.afterBody = (items) => {
                     const idx = items[0].dataIndex;
                     const lines = [];
